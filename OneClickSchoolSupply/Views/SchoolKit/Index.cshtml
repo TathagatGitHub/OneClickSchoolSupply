@@ -1,0 +1,44 @@
+﻿@model IEnumerable<OneClickSchoolSupply.Models.SchoolKit>
+
+@{
+    ViewBag.Title = "Index";
+}
+<script type="text/javascript"
+        src="@Url.Content("~/scripts/jquery-1.8.2.js")"></script>
+
+<script type="text/javascript"
+        src="@Url.Content("~/scripts/jquery.unobtrusive-ajax.js")"></script>
+
+<script type="text/javascript"> 
+    $("#a").each(function () {
+        var target = $(this);
+        target.autocomplete({ source: target.attr("data-autocomplete-source") });
+    });
+</script>
+
+    <h2>Index</h2>
+
+    @using (Ajax.BeginForm("SchoolKitList", "SchoolKit", new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "ShowKits" }))
+{
+
+    <input id="a" type="text" name="SchoolName" class="form-control" placeholder="Search" maxlength="20" size="20" style="width: 250px;" role="search" data-autocomplete-source="@Url.Action("RemoteData", "Home")" />
+                   <input class="btn-xs" type="submit" value="Search" />
+}
+
+
+    <p>
+        @Html.ActionLink("New-Dialog", "CreateSchoolKitUsingParticalView", "SchoolKit", null, new { @class = "modal-link" })
+        @Html.ActionLink("New", "Create", "SchoolKit")
+        @*- When want to use normal window
+            <h3><span class="label label-info">@Html.ActionLink("Create New", "Create", "SchoolKit", null, new { @id = "openDialog" })</span></h3>*@
+
+        @* -- Original version - Normal Window
+            <h3><span class="label label-info">@Html.ActionLink("Create New", "Create")</span></h3> *@
+
+    </p>
+    <div id="ShowKits">
+        @Html.Partial("_IndexPartiaView")
+    </div>
+    <p>
+        <h3><span class="label label-info">@Html.ActionLink("Buy", "Buy", "ShoppingCart")</span></h3>
+    </p>

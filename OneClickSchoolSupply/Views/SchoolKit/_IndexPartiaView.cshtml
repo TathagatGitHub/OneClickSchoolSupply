@@ -1,0 +1,59 @@
+﻿@model IEnumerable<OneClickSchoolSupply.Models.SchoolKit>
+
+<div class="row" id="ShowKits">
+    <table class="table table-striped table-hover table-bordered">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SchoolName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Grade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SchoolDistrict)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KitPrice)
+            </th>
+            <th>Buy</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SchoolName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Grade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SchoolDistrict)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.KitPrice)
+                </td>
+
+
+                <td>
+                    @Html.CheckBox("chkEnabled" + item.KitId, new { @class = "EnabledFlag" })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.KitId }) |
+                    @Html.ActionLink("Edit-Dialog", "EditDialog", "SchoolKit", new { id = item.KitId }, new { @class = "modal-link" }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.KitId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.KitId })
+                    <span class="label label-info">@Html.ActionLink("Buy", "Buy", "ShoppingCart")</span>
+                </td>
+
+
+            </tr>
+        }
+
+    </table>
+
+</div>

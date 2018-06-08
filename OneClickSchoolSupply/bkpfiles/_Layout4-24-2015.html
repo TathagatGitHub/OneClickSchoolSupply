@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - WWW.OneClickSchoolSupply.com</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/Custom.css")
+        @Styles.Render("~/Content/Site.css")
+        <link rel="stylesheet" href="Content/bootstrap-submenu.min.css"> 
+         @Styles.Render("~/Content/bootstrap-flaty.css")
+        @Styles.Render("~/Content/bootstrap-social.css")
+        @Scripts.Render("~/bundles/modernizr")
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+      
+       
+    </head>
+<body>
+    <header>
+        <div class="container-fluid">
+
+            @* new header*@
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-8">
+                    <div class="float-left">
+                        <p class="site-title text-info">
+
+                            <a class="navbar-brand" rel="home" href="#" title="Brand" style="padding-top: 0px; padding-bottom: 0px">
+                                <img style="height: 70px; width: 200px;" src="/Images/FinalLogoImage1.png">@Html.ActionLink("OneClickSchoolSupply.com", "Index", "Home")
+                        </p>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-md-4">
+                    <div class="float-right shadow">
+                        <section id="login">
+                            @Html.Partial("_LoginPartial")
+                        </section>
+
+                    </div>
+                </div>
+                <div class="clearfix visible-md-block"></div>
+                <div class="row">
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-md-offset-10 float-right text-info"> @DateTime.Today</div>
+
+                    <!-- Optional: clear the XS cols if their content doesn't match in height -->
+
+
+                    <div class="row">
+                        <div class="float-right">
+                            <nav class="navbar navbar-inverse">
+
+                                <nav class="navbar navbar-inverse">
+                                    <div class="container-fluid">
+                                        <div class="navbar-header">
+                                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+                                                <span class="sr-only">Toggle navigation</span>
+                                                <span class="icon-bar"></span>
+                                                <span class="icon-bar"></span>
+                                                <span class="icon-bar"></span>
+                                            </button>
+
+                                        </div>
+                                        <div class="collapse navbar-collapse " id="bs-example-navbar-collapse-2">
+                                            <ul class="nav navbar-nav">
+
+                                                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+
+                                                <li class="dropdown">
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Shop By School <b class="caret"></b></a>
+
+                                                    <ul class="dropdown-menu" role="menu">
+                                                        <li class="dropdown dropdown-submenu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Centralia School District</a>
+                                                            <ul class="dropdown-menu">
+
+                                                                @*<li>@Html.ActionLink("Buena Terra", "SchoolKitList", "SchoolKit")</li>*@
+                                                                <li> @Html.ActionLink("Buena Terra", "SchoolKitList", "SchoolKit", new { SchoolName = "Buena Terra" }, null) </li>
+                                                                <li> @Html.ActionLink("San Marino", "SchoolKitList", "SchoolKit", new { SchoolName = "San Marino" }, null) </li>
+                                                                <li> @Html.ActionLink("Los Coyotee", "SchoolKitList", "SchoolKit", new { SchoolName = "Los Coyotee" }, null) </li>
+
+                                                            </ul>
+                                                        </li>
+
+                                                        <li class="divider"></li>
+                                                        <li class="dropdown dropdown-submenu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cypress School District</a>
+                                                            <ul class="dropdown-menu">
+
+                                                                <li> @Html.ActionLink("Lendal Elementry", "SchoolKitList", "SchoolKit", new { SchoolName = "Lendal Elementry" }, null) </li>
+
+                                                            </ul>
+                                                        </li>
+
+                                                        <li class="divider"></li>
+                                                        <li class="dropdown dropdown-submenu">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Buena Park School District</a>
+                                                            <ul class="dropdown-menu">
+                                                                <li> @Html.ActionLink("Buena Park Elementry", "SchoolKitList", "SchoolKit", new { SchoolName = "Buena Park Elementry" }, null) </li>
+
+
+                                                            </ul>
+                                                        </li>
+
+                                                    </ul>
+                                                </li>
+                                                <li class="dropdown">
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Build Your Kit <b class="caret"></b></a>
+
+                                                    <ul class="dropdown-menu" role="menu">
+                                                        <li>@Html.ActionLink("Shools List", "Index", "SchoolKit")</li>
+                                                        <li> @Html.ActionLink("Kit Items", "Index", "KitItem")</li>
+
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                            <form class="navbar-form navbar-left" role="search">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="Search">
+                                                </div>
+                                                <button type="submit" class="btn btn-default">Submit</button>
+                                            </form>
+                                            @* <ul class="nav navbar-nav navbar-right">
+                                                    <li><a href="#">Link</a></li>
+                                                </ul>*@
+
+                                        </div>
+                                    </div>
+                                </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </header>
+
+    <div class="container-fluid">
+    <div class="row">
+
+            <div class="col-md-1 ">
+                <a href="https://twitter.com/share" class="twitter-share-button" data-size="large">Tweet</a>
+                <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');</script>
+
+                <div id="fb-root"></div>
+
+                <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+
+                <div class="g-plusone" data-size="small" data-annotation="inline" data-width="300"></div>
+
+            </div>
+
+            <div class="col-md-9">
+
+                <div class="container body-content">
+                 
+                        @RenderSection("featured", required: false)
+                       
+                    <section class="content-wrapper main-content ">
+                        @RenderBody()
+                    </section>
+
+                </div>
+
+                    <div class="container-fluid">
+                        <hr />
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="col-md-3">
+                                    <ul class="nav nav-pills nav-stacked">
+                                        <li class="text-info"><a href="/">© 2015 www.OneClickSchoolSupply.com</a></li>
+                                        
+                                    </ul>
+                                </div>
+                                <div class="col-md-3">
+                                    <ul class="nav nav-pills nav-stacked">
+                                        <li class="btn-group btn-group-justified">@Html.ActionLink("About Us", "About", "Home")</li>
+
+                                    </ul>
+                                </div>
+                                <div class="col-md-3">
+                                    <ul class="nav nav-pills nav-stacked">
+                                        <li><a href="#">Contacts</a></li>
+
+                                     
+                                    </ul>
+                                </div>
+                                <div class="col-md-3">
+                                    <ul class="nav nav-pills nav-stacked">
+                                        <li><a href="#">Privacy</a></li>
+                                       
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                        <hr>
+                  
+                    </div>
+
+                </div>
+           
+            <!-- Add clearfix for only the required viewport -->
+            <div class="clearfix visible-xs"></div>
+            <div class="col-md-2">
+                <div class="panel panel-info shadow">
+                    <div class="panel-heading">
+                        <h1 class="panel-title"> School Supply Made easy! </h1>
+                        <span class="pull-left clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+                        <div class="panel-body">
+                            No more coupons search! <br />
+                            No driving to reatil stores
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Scripts/bootstrap.js")
+    @Scripts.Render("~/Scripts/bootstrap-submenu.min.js")
+    @Scripts.Render("~/Scripts/ModelWindow.js")
+    @Scripts.Render("~/Scripts/Dropdown-Submenu.js")
+    @Scripts.Render("~/Scripts/SocialMedia.js")
+    @Scripts.Render("~/Scripts/CustomDevelopment.js")
+    @RenderSection("scripts", required: false)
+
+
+    @*Model Window scripts and Div tag start        *@
+
+    <div id="modal-container" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">Model Window</h2>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+            </html>

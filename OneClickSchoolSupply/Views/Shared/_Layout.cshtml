@@ -1,0 +1,366 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - WWW.OneClickSchoolSupply.com</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+             
+        @Styles.Render("~/Content/Site.css")
+            <link rel="stylesheet" href="Content/bootstrap-submenu.min.css"> 
+         @Styles.Render("~/Content/bootstrap-flaty.css")
+        @Styles.Render("~/Content/Custom.css")
+        
+    <script src="@Url.Content("~/Scripts/jquery-1.9.1.js")" type="text/javascript"></script>
+
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+      
+        <style>
+            #targetUL {
+                width: 110px;
+                border: 1px solid silver;
+                margin-top: 2px;
+                list-style: none;
+            }
+
+                #targetUL li {
+                    margin-left: -40px;
+                    border-bottom: 1px solid silver;
+                    height: 26px;
+                    padding-left: 5px;
+                    padding-top: 8px;
+                    cursor: pointer;
+                }
+        </style>
+
+        <script type="text/javascript">
+           $(document).ready(function () {
+
+               //We have used keyup event to track the user enter value in the textbox.
+               $("#target").keyup(function () {
+
+                   //Fetching the textbox value.
+                   var query = $(this).val();
+                   //Calling GetItems method.
+                   getItems(query);
+               });
+
+               function getItems(query) {
+
+                   //Here we are using ajax get method to fetch data from the list based on the user entered value in the textbox.
+                   //We are sending query i.e textbox as data.
+                   $.ajax({
+                       url: '@Url.Action( "RemoteData", "Home")',
+                       data: { "query": query },
+                       type: 'POST',
+                       dataType: 'json',
+                       success: function (response) {
+                           if (response.Data != null) {
+                               if ($("#targetUL") != undefined) {
+                                   //If the UL element is not null or undefined we are clearing it, so that the result is appended in new UL every next time.
+                                   $("#targetUL").remove();
+                               }
+                               //assigning json response data to local variable. It is basically list of values.
+                               data = response.Data;
+                               //appending an UL element to show the values.
+                               $("#targetDiv").append($("<ul id='targetUL'></ul>"));
+                               //Removing previously added li elements to the list.
+                               $("#targetUL").find("li").remove();
+                               //We are iterating over the list returned by the json and for each element we are creating a li element and appending the li element to ul element.
+                               $.each(data, function (i, value) {
+                                   //On click of li element we are calling a method.
+                                   $("#targetUL").append($("<li class='targetLI' onclick='javascript:appendTextToTextBox(this)'>" + value + "</li>"));
+
+                               });
+                           }
+                           else {
+                               //If data is null the we are removing the li and ul elements.
+                               $("#targetUL").find("li").remove();
+                               $("#targetUL").remove();
+                           }
+                       },
+                       error: function (xhr, status, error) {
+                       }
+                   });
+               }
+           });
+
+           //This method appends the text oc clicked li element to textbox.
+           function appendTextToTextBox(e) {
+               //Getting the text of selected li element.
+               var textToappend = e.innerText;
+               //setting the value attribute of textbox with selected li element.
+               $("#target").val(textToappend);
+               //Removing the ul element once selected element is set to textbox.
+               $("#targetUL").remove();
+           }
+        </script>
+
+    </head>
+<body>
+    <header>
+        <div class="container-fluid">
+                        @* new header*@
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-8">
+                    <div >
+                        <p class="site-title text-info">
+
+                            <a class="navbar-brand" rel="home" href="#" title="Brand" style="padding-top: 0px; padding-bottom: 0px">
+                                <img style="height: 70px; width: 200px;" src="/Images/FinalLogoImage1.png">@Html.ActionLink("OneClickSchoolSupply.com", "Index", "Home")
+                        </p>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-md-4">
+                    <div class="float-right shadow">
+                        <section id="login">
+                            @Html.Partial("_LoginPartial")
+                        </section>
+
+                    </div>
+                </div>
+                <div class="clearfix visible-md-block"></div>
+                <div class="row">
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-md-offset-10 float-right text-info"> @DateTime.Today</div>
+
+                    <!-- Optional: clear the XS cols if their content doesn't match in height -->
+
+
+                    <div class="row">
+                     <div class="col-lg-8" >
+                        <nav class="float-left">
+                                <nav class="navbar">
+
+                                    <nav class="navbar  navbar-inverse" style="box-shadow: 10px 10px 5px grey;>
+                                        <div class=" container-fluid ">
+                                            <div class=" navbar-header">
+                                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+                                            <span class="sr-only">Toggle navigation</span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                        </button>
+
+</div>
+                                            <div class="collapse navbar-collapse " id="bs-example-navbar-collapse-2">
+                                                <ul class="nav navbar-nav">
+                                                   
+                                                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+
+                                                    <li class="dropdown">
+                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Shop By School <b class="caret"></b></a>
+
+                                                        <ul class="dropdown-menu" role="menu">
+                                                            <li class="dropdown dropdown-submenu">
+                                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" >Centralia School District </a>
+                                                                <ul class="dropdown-menu">
+
+                                                                    @*<li>@Html.ActionLink("Buena Terra", "SchoolKitList", "SchoolKit")</li>*@
+                                                                    <li> @Html.ActionLink("Buena Terra", "SchoolKitList", "SchoolKit", new { SchoolName = "Buena Terra" }, null) </li>
+                                                                    <li> @Html.ActionLink("San Marino", "SchoolKitList", "SchoolKit", new { SchoolName = "San Marino" }, null) </li>
+                                                                    <li> @Html.ActionLink("Los Coyotee", "SchoolKitList", "SchoolKit", new { SchoolName = "Los Coyotee" }, null) </li>
+
+                                                                </ul>
+                                                            </li>
+
+                                                            <li class="divider"></li>
+                                                            <li class="dropdown dropdown-submenu">
+                                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cypress School District</a>
+                                                                <ul class="dropdown-menu">
+
+                                                                    <li> @Html.ActionLink("Lendal Elementry", "SchoolKitList", "SchoolKit", new { SchoolName = "Lendal Elementry" }, null) </li>
+
+                                                                </ul>
+                                                            </li>
+
+                                                            <li class="divider"></li>
+                                                            <li class="dropdown dropdown-submenu">
+                                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Buena Park School District</a>
+                                                                <ul class="dropdown-menu">
+                                                                    <li> @Html.ActionLink("Buena Park Elementry", "SchoolKitList", "SchoolKit", new { SchoolName = "Buena Park Elementry" }, null) </li>
+
+
+                                                                </ul>
+                                                            </li>
+
+                                                        </ul>
+                                                    </li>
+                                                    <li class="dropdown">
+                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Build Your Kit <b class="caret"></b></a>
+
+                                                        <ul class="dropdown-menu" role="menu">
+                                                            <li>@Html.ActionLink("Shools List", "Index", "SchoolKit")</li>
+                                                            <li> @Html.ActionLink("Kit Items", "Index", "KitItem")</li>
+
+                                                        </ul>
+                                                    </li>
+                                                    <li class="dropdown">
+                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Build Your Kit <b class="caret"></b></a>
+
+                                                        <ul class="dropdown-menu" role="menu">
+                                                            <li>@Html.ActionLink("Shools List", "Index", "SchoolKit")</li>
+                                                            <li> @Html.ActionLink("Kit Items", "Index", "KitItem")</li>
+                                                            <li> @Html.ActionLink("Tab View", "TabView", "SchoolKit")</li>
+
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                                <form class="navbar-form navbar-right" role="search" >
+                                                    <div class="form-group" id="targetDiv">
+                                                        <input type="text" class="form-control" placeholder="Search" id="target" name="q">
+                                                    </div>
+                                                   @* <button type="submit" class="btn btn-sm">Search</button>*@
+                                                    <input class="btn-group-sm" type="submit" title="Search" onclick="location.href='@Url.Action("Index", "Home")'" />
+                                                </form>
+                                            
+
+                                            </div>
+                                        </div>
+                                    </nav>
+                                </nav>
+                        </nav>
+                    </div>
+                       
+
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            
+    </header>
+
+    <div class="container-fluid">
+    <div class="row">
+
+            <div class="col-md-1 ">
+                <a href="https://twitter.com/share" class="twitter-share-button" data-size="large">Tweet</a>
+                <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');</script>
+
+                <div id="fb-root"></div>
+                
+                <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+             
+                <div class="g-plusone" data-size="small" data-annotation="inline" data-width="300"></div>
+
+            </div>
+
+            <div class="col-md-9">
+
+                <div class="container body-content">
+
+                    @RenderSection("featured", required: false)
+
+                    <section class="content-wrapper main-content ">
+                        @RenderBody()
+                    </section>
+
+                </div>
+                <!-- Static bottom navbar -->
+                <div class="navbar navbar-nav navbar-fixed-bottom">
+                    <div class="container">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle btn-sm" data-toggle="collapse" data-target=".bottom-collapse">
+                                <!-- NOTE! data-target was changed to .bottom-collapse -->
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="#">Bottom Bar</a>
+                        </div>
+                        <div class="navbar-collapse collapse bottom-collapse">
+                            <!-- NOTE! The extra bottom-collapse class put on here -->
+                            <ul class="nav navbar-nav">
+                                <li class="active"><a href="#">More</a></li>
+                                <li><a href="#about">Bottom</a></li>
+                                <li><a href="#contact">Menus</a></li>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="../navbar/">Default</a></li>
+                                <li><a href="../navbar-fixed-top/">Fixed Bottom</a></li>
+                            </ul>
+                        </div><!--/.nav-collapse -->
+                    </div>
+                </div>
+                </div>
+           
+            <!-- Add clearfix for only the required viewport -->
+            <div class="clearfix visible-xs"></div>
+            <div class="col-md-2">
+                <div class="shadow">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h1 class="panel-title"> School Supply Made easy! </h1>
+                            <span class="pull-left clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+                            <div class="panel-body">
+                                No more coupons search! <br />
+                                No driving to reatil stores
+                               
+
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="shadow">
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                <h1 class="panel-title"> School Supply Made easy! </h1>
+                                <span class="pull-left clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+                                <div class="panel-body">
+                                    No more coupons search! <br />
+                                    No driving to reatil stores
+
+
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        <br />
+                <div class="shadow">
+                    <div class="panel panel-warning">
+                        <div class="panel-heading">
+                            <h1 class="panel-title"> School Supply Made easy! </h1>
+                            <span class="pull-left clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+                            <div class="panel-body">
+                                No more coupons search! <br />
+                                No driving to reatil stores
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Scripts/bootstrap.js")
+    @Scripts.Render("~/Scripts/bootstrap-submenu.min.js")
+    @Scripts.Render("~/Scripts/ModelWindow.js")
+    @Scripts.Render("~/Scripts/Dropdown-Submenu.js")
+    @Scripts.Render("~/Scripts/SocialMedia.js")
+    @Scripts.Render("~/Scripts/CustomDevelopment.js")
+    @RenderSection("scripts", required: false)
+
+    @*Model Window scripts and Div tag start        *@
+
+    <div id="modal-container" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">Model Window</h2>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+            </html>

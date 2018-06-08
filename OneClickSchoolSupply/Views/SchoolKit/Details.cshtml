@@ -1,0 +1,63 @@
+﻿@model OneClickSchoolSupply.Models.SchoolKit
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+
+<h2>Details</h2>
+<div class="shadow">
+    <div class="panel">
+        <div class="panel-heading">
+            <h5 class="text-info"> @Html.DisplayFor(model => model.Name)  -  @Html.DisplayFor(model => model.SchoolName) - @Html.DisplayFor(model => model.Grade) - @Html.DisplayFor(model => model.SchoolDistrict) - @Html.DisplayFor(model => model.KitPrice)</h5>
+            <span class="pull-left clickable"><i class="glyphicon glyphicon-chevron-up"></i></span>
+            <div class="panel-body">
+                <fieldset>
+                    <legend>SchoolKit</legend>
+
+                    <div class="display-label">
+                        @Html.DisplayNameFor(model => model.Name)
+                    </div>
+                    <div class="display-field">
+                        @Html.DisplayFor(model => model.Name)
+                    </div>
+
+                    <div class="display-label">
+                        @Html.DisplayNameFor(model => model.SchoolName)
+                    </div>
+                    <div class="display-field">
+                        @Html.DisplayFor(model => model.SchoolName)
+                    </div>
+
+                    <div class="display-label">
+                        @Html.DisplayNameFor(model => model.Grade)
+                    </div>
+                    <div class="display-field">
+                        @Html.DisplayFor(model => model.Grade)
+                    </div>
+
+                    <div class="display-label">
+                        @Html.DisplayNameFor(model => model.SchoolDistrict)
+                    </div>
+                    <div class="display-field">
+                        @Html.DisplayFor(model => model.SchoolDistrict)
+                    </div>
+
+                    <div class="display-label">
+                        @Html.DisplayNameFor(model => model.KitPrice)
+                    </div>
+                    <div class="display-field">
+                        @Html.DisplayFor(model => model.KitPrice)
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.KitId }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
